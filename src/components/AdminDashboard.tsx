@@ -232,7 +232,7 @@ const AdminDashboard: React.FC = () => {
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    if (password === 'ClickEats@Admin!2025') {
+    if (password === 'Kg3connect@Admin!2026') {
       setIsAuthenticated(true);
       localStorage.setItem('beracah_admin_auth', 'true');
       setLoginError('');
@@ -762,8 +762,8 @@ const AdminDashboard: React.FC = () => {
                             </span>
                           )}
                           <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.available
-                              ? 'bg-green-100 text-green-800'
-                              : 'bg-red-100 text-red-800'
+                            ? 'bg-green-100 text-green-800'
+                            : 'bg-red-100 text-red-800'
                             }`}>
                             {item.available ? 'Available' : 'Unavailable'}
                           </span>
@@ -870,8 +870,8 @@ const AdminDashboard: React.FC = () => {
                         </span>
                       )}
                       <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${item.available
-                          ? 'bg-green-100 text-green-800'
-                          : 'bg-red-100 text-red-800'
+                        ? 'bg-green-100 text-green-800'
+                        : 'bg-red-100 text-red-800'
                         }`}>
                         {item.available ? 'Available' : 'Unavailable'}
                       </span>

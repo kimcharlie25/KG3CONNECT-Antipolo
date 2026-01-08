@@ -72,7 +72,7 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
     `.trim();
 
     const encodedMessage = encodeURIComponent(orderDetails);
-    const messengerUrl = `https://m.me/61579693577478?text=${encodedMessage}`;
+    const messengerUrl = `https://m.me/100087943638846?text=${encodedMessage}`;
 
     window.open(messengerUrl, '_blank');
   };
