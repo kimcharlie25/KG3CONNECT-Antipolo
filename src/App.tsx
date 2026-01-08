@@ -56,7 +56,10 @@ function MainApp() {
         <Checkout
           cartItems={cart.cartItems}
           totalPrice={cart.getTotalPrice()}
-          onBack={() => handleViewChange('menu')}
+          onBack={() => {
+            cart.clearCart();
+            handleViewChange('menu');
+          }}
         />
       )}
     </div>

@@ -158,7 +158,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
 
           {/* Pricing Section */}
           <div className="flex items-center justify-between mb-4">
-            <div className="flex-1">
+            <div className="flex-1 hidden">
               {item.isOnDiscount && item.discountPrice ? (
                 <div className="space-y-1">
                   <div className="flex items-center space-x-2">

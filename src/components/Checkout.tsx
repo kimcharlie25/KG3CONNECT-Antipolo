@@ -43,7 +43,6 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 🛒 KG3CONNECT ORDER
 
 👤 Customer: ${customerName}
-👤 Customer: ${customerName}
 📞 Contact: ${contactNumber}
 ${wifiName ? `📶 Wifi Name: ${wifiName}` : ''}
 ${wifiPassword ? `🔑 Wifi Password: ${wifiPassword}` : ''}
@@ -62,11 +61,11 @@ ${cartItems.map(item => {
             : addOn.name
         ).join(', ')}`;
       }
-      itemDetails += ` x${item.quantity} - ₱${item.totalPrice * item.quantity}`;
+      // itemDetails += ` x${item.quantity} - ₱${item.totalPrice * item.quantity}`;
       return itemDetails;
     }).join('\n')}
 
-💰 TOTAL: ₱${totalPrice}
+💰 Installation Fee: ₱${totalPrice}
 
 💳 Payment: ${selectedPaymentMethod?.name || paymentMethod}
 📸 Payment Screenshot: Please attach your payment receipt screenshot
@@ -108,6 +107,7 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
                 <div key={item.id} className="flex items-center justify-between py-2 border-b border-gray-100">
                   <div>
                     <h4 className="font-medium text-gray-900">{item.name}</h4>
+                    <p className="text-xs text-gray-500 mb-1">{item.description}</p>
                     {item.selectedVariation && (
                       <p className="text-sm text-gray-600">Size: {item.selectedVariation.name}</p>
                     )}
@@ -116,16 +116,16 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
                         Add-ons: {item.selectedAddOns.map(addOn => addOn.name).join(', ')}
                       </p>
                     )}
-                    <p className="text-sm text-gray-600">₱{item.totalPrice} x {item.quantity}</p>
+                    {/* <p className="text-sm text-gray-600">₱{item.totalPrice} x {item.quantity}</p> */}
                   </div>
-                  <span className="font-semibold text-gray-900">₱{item.totalPrice * item.quantity}</span>
+                  {/* <span className="font-semibold text-gray-900">₱{item.totalPrice * item.quantity}</span> */}
                 </div>
               ))}
             </div>
 
             <div className="border-t border-gray-200 pt-4">
               <div className="flex items-center justify-between text-2xl font-semibold text-gray-900">
-                <span>Total:</span>
+                <span>Installation Fee:</span>
                 <span>₱{totalPrice}</span>
               </div>
             </div>
@@ -326,6 +326,7 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
               <div key={item.id} className="flex items-center justify-between py-2 border-b border-gray-100">
                 <div>
                   <h4 className="font-medium text-gray-900">{item.name}</h4>
+                  <p className="text-xs text-gray-500 mb-1">{item.description}</p>
                   {item.selectedVariation && (
                     <p className="text-sm text-gray-600">Size: {item.selectedVariation.name}</p>
                   )}
@@ -338,16 +339,16 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
                       ).join(', ')}
                     </p>
                   )}
-                  <p className="text-sm text-gray-600">₱{item.totalPrice} x {item.quantity}</p>
+                  {/* <p className="text-sm text-gray-600">₱{item.totalPrice} x {item.quantity}</p> */}
                 </div>
-                <span className="font-semibold text-gray-900">₱{item.totalPrice * item.quantity}</span>
+                {/* <span className="font-semibold text-gray-900">₱{item.totalPrice * item.quantity}</span> */}
               </div>
             ))}
           </div>
 
           <div className="border-t border-gray-200 pt-4 mb-6">
             <div className="flex items-center justify-between text-2xl font-semibold text-gray-900">
-              <span>Total:</span>
+              <span>Installation Fee:</span>
               <span>₱{totalPrice}</span>
             </div>
           </div>

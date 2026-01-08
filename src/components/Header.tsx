@@ -33,7 +33,7 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
               {loading ? (
                 <div className="w-24 h-6 bg-white/20 rounded animate-pulse" />
               ) : (
-                "KG3CONNECT-Antipolo"
+                siteSettings?.site_name || "KG3CONNECT-Antipolo"
               )}
             </h1>
           </button>
