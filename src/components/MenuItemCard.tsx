@@ -200,7 +200,7 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                   onClick={handleAddToCart}
                   className="bg-kg3-orange text-white px-6 py-2.5 rounded-xl hover:opacity-90 transition-all duration-200 transform hover:scale-105 font-medium text-sm shadow-lg hover:shadow-xl"
                 >
-                  {item.variations?.length || item.addOns?.length ? 'Customize' : 'Select'}
+                  {item.variations?.length || item.addOns?.length ? 'Customize' : 'Avail plan'}
                 </button>
               ) : (
                 <div className="flex items-center space-x-2 bg-gray-100 rounded-xl p-1 border border-gray-200">
@@ -259,8 +259,8 @@ const MenuItemCard: React.FC<MenuItemCardProps> = ({
                       <label
                         key={variation.id}
                         className={`flex items-center justify-between p-4 border-2 rounded-xl cursor-pointer transition-all duration-200 ${selectedVariation?.id === variation.id
-                            ? 'border-kg3-orange bg-orange-50'
-                            : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                          ? 'border-kg3-orange bg-orange-50'
+                          : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
                           }`}
                       >
                         <div className="flex items-center space-x-3">
