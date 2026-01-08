@@ -14,6 +14,8 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
   const [step, setStep] = useState<'details' | 'payment'>('details');
   const [customerName, setCustomerName] = useState('');
   const [contactNumber, setContactNumber] = useState('');
+  const [wifiName, setWifiName] = useState('');
+  const [wifiPassword, setWifiPassword] = useState('');
   const [address, setAddress] = useState('');
   const [landmark, setLandmark] = useState('');
   const [paymentMethod, setPaymentMethod] = useState<PaymentMethod>('bank-transfer');
@@ -41,7 +43,10 @@ const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) =>
 🛒 KG3CONNECT ORDER
 
 👤 Customer: ${customerName}
+👤 Customer: ${customerName}
 📞 Contact: ${contactNumber}
+${wifiName ? `📶 Wifi Name: ${wifiName}` : ''}
+${wifiPassword ? `🔑 Wifi Password: ${wifiPassword}` : ''}
 🏠 Address: ${address}${landmark ? `\n🗺️ Landmark: ${landmark}` : ''}
 
 📋 ORDER DETAILS:
@@ -154,6 +159,29 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
                   placeholder="09XX XXX XXXX"
                   required
                 />
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Wifi Name (Optional)</label>
+                  <input
+                    type="text"
+                    value={wifiName}
+                    onChange={(e) => setWifiName(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kg3-orange focus:border-transparent transition-all duration-200"
+                    placeholder="Enter Wifi Name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-2">Wifi Password (Optional)</label>
+                  <input
+                    type="text"
+                    value={wifiPassword}
+                    onChange={(e) => setWifiPassword(e.target.value)}
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kg3-orange focus:border-transparent transition-all duration-200"
+                    placeholder="Enter Wifi Password"
+                  />
+                </div>
               </div>
 
               <div>
@@ -288,6 +316,8 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
               <h4 className="font-medium text-gray-900 mb-2">Customer Details</h4>
               <p className="text-sm text-gray-600">Name: {customerName}</p>
               <p className="text-sm text-gray-600">Contact: {contactNumber}</p>
+              {wifiName && <p className="text-sm text-gray-600">Wifi Name: {wifiName}</p>}
+              {wifiPassword && <p className="text-sm text-gray-600">Wifi Password: {wifiPassword}</p>}
               <p className="text-sm text-gray-600">Address: {address}</p>
               {landmark && <p className="text-sm text-gray-600">Landmark: {landmark}</p>}
             </div>

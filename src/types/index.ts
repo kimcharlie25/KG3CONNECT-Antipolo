@@ -44,6 +44,8 @@ export interface OrderData {
   items: CartItem[];
   customerName: string;
   contactNumber: string;
+  wifiName?: string;
+  wifiPassword?: string;
   serviceType: 'dine-in' | 'pickup' | 'delivery';
   address?: string;
   pickupTime?: string;
@@ -55,6 +57,7 @@ export interface OrderData {
   total: number;
   notes?: string;
 }
+
 
 export type PaymentMethod = 'gcash' | 'maya' | 'bank-transfer';
 export type ServiceType = 'dine-in' | 'pickup' | 'delivery';
