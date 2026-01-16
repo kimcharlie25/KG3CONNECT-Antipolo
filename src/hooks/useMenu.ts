@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
 import { MenuItem } from '../types';
 
-export const useMenu = () => {
+export const useMenu = (locationId?: string) => {
   const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -10,16 +10,22 @@ export const useMenu = () => {
   const fetchMenuItems = async () => {
     try {
       setLoading(true);
-      
-      // Fetch menu items with their variations and add-ons
-      const { data: items, error: itemsError } = await supabase
+
+      // Build base query
+      let query = supabase
         .from('menu_items')
         .select(`
           *,
           variations (*),
           add_ons (*)
-        `)
-        .order('created_at', { ascending: true });
+        `);
+
+      // Filter by location if provided
+      if (locationId) {
+        query = query.eq('location_id', locationId);
+      }
+
+      const { data: items, error: itemsError } = await query.order('created_at', { ascending: true });
 
       if (itemsError) throw itemsError;
 
@@ -28,11 +34,11 @@ export const useMenu = () => {
         const now = new Date();
         const discountStart = item.discount_start_date ? new Date(item.discount_start_date) : null;
         const discountEnd = item.discount_end_date ? new Date(item.discount_end_date) : null;
-        
-        const isDiscountActive = item.discount_active && 
-          (!discountStart || now >= discountStart) && 
+
+        const isDiscountActive = item.discount_active &&
+          (!discountStart || now >= discountStart) &&
           (!discountEnd || now <= discountEnd);
-        
+
         // Calculate effective price
         const effectivePrice = isDiscountActive && item.discount_price ? item.discount_price : item.base_price;
 
@@ -45,18 +51,19 @@ export const useMenu = () => {
           popular: item.popular,
           available: item.available ?? true,
           image: item.image_url || undefined,
+          locationId: item.location_id || undefined,
           discountPrice: item.discount_price || undefined,
           discountStartDate: item.discount_start_date || undefined,
           discountEndDate: item.discount_end_date || undefined,
           discountActive: item.discount_active || false,
           effectivePrice,
           isOnDiscount: isDiscountActive,
-          variations: item.variations?.map(v => ({
+          variations: item.variations?.map((v: { id: string; name: string; price: number }) => ({
             id: v.id,
             name: v.name,
             price: v.price
           })) || [],
-          addOns: item.add_ons?.map(a => ({
+          addOns: item.add_ons?.map((a: { id: string; name: string; price: number; category: string }) => ({
             id: a.id,
             name: a.name,
             price: a.price,
@@ -88,6 +95,7 @@ export const useMenu = () => {
           popular: item.popular || false,
           available: item.available ?? true,
           image_url: item.image || null,
+          location_id: item.locationId || null,
           discount_price: item.discountPrice || null,
           discount_start_date: item.discountStartDate || null,
           discount_end_date: item.discountEndDate || null,
@@ -150,6 +158,7 @@ export const useMenu = () => {
           popular: updates.popular,
           available: updates.available,
           image_url: updates.image || null,
+          location_id: updates.locationId || null,
           discount_price: updates.discountPrice || null,
           discount_start_date: updates.discountStartDate || null,
           discount_end_date: updates.discountEndDate || null,
@@ -219,7 +228,7 @@ export const useMenu = () => {
 
   useEffect(() => {
     fetchMenuItems();
-  }, []);
+  }, [locationId]);
 
   return {
     menuItems,

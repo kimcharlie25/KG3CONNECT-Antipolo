@@ -1,12 +1,14 @@
 import React from 'react';
-
+import { MapPin } from 'lucide-react';
 import { useSiteSettings } from '../hooks/useSiteSettings';
 
 interface HeaderProps {
   onMenuClick: () => void;
+  locationName?: string;
+  onChangeLocation?: () => void;
 }
 
-const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
+const Header: React.FC<HeaderProps> = ({ onMenuClick, locationName, onChangeLocation }) => {
   const { siteSettings, loading } = useSiteSettings();
 
   return (
@@ -37,6 +39,18 @@ const Header: React.FC<HeaderProps> = ({ onMenuClick }) => {
               )}
             </h1>
           </button>
+
+          {/* Location Badge */}
+          {locationName && (
+            <button
+              onClick={onChangeLocation}
+              className="flex items-center space-x-2 bg-white/20 hover:bg-white/30 text-white px-3 py-1.5 rounded-full transition-colors duration-200 text-sm"
+            >
+              <MapPin className="h-4 w-4" />
+              <span className="font-medium">{locationName}</span>
+              <span className="text-white/80 text-xs">Change</span>
+            </button>
+          )}
         </div>
       </div>
     </header>

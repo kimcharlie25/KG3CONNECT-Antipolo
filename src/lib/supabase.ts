@@ -55,6 +55,7 @@ export type Database = {
           discount_start_date: string | null;
           discount_end_date: string | null;
           discount_active: boolean;
+          location_id: string | null;
           created_at: string;
           updated_at: string;
         };
@@ -71,6 +72,7 @@ export type Database = {
           discount_start_date?: string | null;
           discount_end_date?: string | null;
           discount_active?: boolean;
+          location_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -87,6 +89,7 @@ export type Database = {
           discount_start_date?: string | null;
           discount_end_date?: string | null;
           discount_active?: boolean;
+          location_id?: string | null;
           created_at?: string;
           updated_at?: string;
         };
@@ -195,6 +198,35 @@ export type Database = {
           value?: string;
           type?: string;
           description?: string | null;
+          updated_at?: string;
+        };
+      };
+      locations: {
+        Row: {
+          id: string;
+          name: string;
+          address: string | null;
+          active: boolean;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: {
+          id?: string;
+          name: string;
+          address?: string | null;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
+          updated_at?: string;
+        };
+        Update: {
+          id?: string;
+          name?: string;
+          address?: string | null;
+          active?: boolean;
+          sort_order?: number;
+          created_at?: string;
           updated_at?: string;
         };
       };

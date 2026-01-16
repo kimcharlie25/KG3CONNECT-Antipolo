@@ -12,6 +12,14 @@ export interface AddOn {
   quantity?: number;
 }
 
+export interface Location {
+  id: string;
+  name: string;
+  address?: string;
+  active: boolean;
+  sortOrder: number;
+}
+
 export interface MenuItem {
   id: string;
   name: string;
@@ -23,6 +31,8 @@ export interface MenuItem {
   available?: boolean;
   variations?: Variation[];
   addOns?: AddOn[];
+  // Location
+  locationId?: string;
   // Discount pricing fields
   discountPrice?: number;
   discountStartDate?: string;
