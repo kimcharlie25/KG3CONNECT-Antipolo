@@ -24,6 +24,8 @@ export const useSiteSettings = () => {
         site_name: data.find(s => s.id === 'site_name')?.value || 'Beracah Cafe',
         site_logo: data.find(s => s.id === 'site_logo')?.value || '',
         site_description: data.find(s => s.id === 'site_description')?.value || '',
+        menu_title: data.find(s => s.id === 'menu_title')?.value || 'Our Offer',
+        menu_description: data.find(s => s.id === 'menu_description')?.value || 'We offer affordable plans powered by end-to-end fiber connectivity, delivering fast and reliable performance with unlimited data and no capping.',
         currency: data.find(s => s.id === 'currency')?.value || 'PHP',
         currency_code: data.find(s => s.id === 'currency_code')?.value || 'PHP'
       };

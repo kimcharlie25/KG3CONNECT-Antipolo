@@ -16,6 +16,7 @@ export interface Location {
   id: string;
   name: string;
   address?: string;
+  messengerUrl?: string;
   active: boolean;
   sortOrder: number;
 }
@@ -85,6 +86,8 @@ export interface SiteSettings {
   site_name: string;
   site_logo: string;
   site_description: string;
+  menu_title: string;
+  menu_description: string;
   currency: string;
   currency_code: string;
 }

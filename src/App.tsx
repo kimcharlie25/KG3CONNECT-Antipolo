@@ -73,6 +73,7 @@ function MainApp() {
         <Checkout
           cartItems={cart.cartItems}
           totalPrice={cart.getTotalPrice()}
+          selectedLocation={selectedLocation}
           onBack={() => {
             cart.clearCart();
             handleViewChange('menu');

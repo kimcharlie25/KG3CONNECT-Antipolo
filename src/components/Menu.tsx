@@ -1,6 +1,7 @@
 import React from 'react';
 import { MenuItem, CartItem } from '../types';
 import { useCategories } from '../hooks/useCategories';
+import { useSiteSettings } from '../hooks/useSiteSettings';
 import MenuItemCard from './MenuItemCard';
 
 // Preload images for better performance
@@ -68,6 +69,8 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuan
   }, []);
 
 
+  const { siteSettings } = useSiteSettings();
+
   return (
     <>
       {/* <MobileNav
@@ -76,9 +79,11 @@ const Menu: React.FC<MenuProps> = ({ menuItems, addToCart, cartItems, updateQuan
       /> */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-noto font-semibold text-black mb-4">Our Offer</h2>
+          <h2 className="text-4xl font-noto font-semibold text-black mb-4">
+            {siteSettings?.menu_title || 'Our Offer'}
+          </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            We offer affordable plans powered by end-to-end fiber connectivity, delivering fast and reliable performance with unlimited data and no capping.
+            {siteSettings?.menu_description || 'We offer affordable plans powered by end-to-end fiber connectivity, delivering fast and reliable performance with unlimited data and no capping.'}
           </p>
         </div>
 

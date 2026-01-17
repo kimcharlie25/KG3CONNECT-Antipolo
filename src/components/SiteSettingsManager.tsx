@@ -10,6 +10,8 @@ const SiteSettingsManager: React.FC = () => {
   const [formData, setFormData] = useState({
     site_name: '',
     site_description: '',
+    menu_title: '',
+    menu_description: '',
     currency: '',
     currency_code: ''
   });
@@ -21,6 +23,8 @@ const SiteSettingsManager: React.FC = () => {
       setFormData({
         site_name: siteSettings.site_name,
         site_description: siteSettings.site_description,
+        menu_title: siteSettings.menu_title,
+        menu_description: siteSettings.menu_description,
         currency: siteSettings.currency,
         currency_code: siteSettings.currency_code
       });
@@ -51,10 +55,10 @@ const SiteSettingsManager: React.FC = () => {
   const handleSave = async () => {
     try {
       let logoUrl = logoPreview;
-      
+
       // Upload new logo if selected
       if (logoFile) {
-        const uploadedUrl = await uploadImage(logoFile, 'site-logo');
+        const uploadedUrl = await uploadImage(logoFile);
         logoUrl = uploadedUrl;
       }
 
@@ -62,6 +66,8 @@ const SiteSettingsManager: React.FC = () => {
       await updateSiteSettings({
         site_name: formData.site_name,
         site_description: formData.site_description,
+        menu_title: formData.menu_title,
+        menu_description: formData.menu_description,
         currency: formData.currency,
         currency_code: formData.currency_code,
         site_logo: logoUrl
@@ -79,6 +85,8 @@ const SiteSettingsManager: React.FC = () => {
       setFormData({
         site_name: siteSettings.site_name,
         site_description: siteSettings.site_description,
+        menu_title: siteSettings.menu_title,
+        menu_description: siteSettings.menu_description,
         currency: siteSettings.currency,
         currency_code: siteSettings.currency_code
       });
@@ -248,6 +256,48 @@ const SiteSettingsManager: React.FC = () => {
             ) : (
               <p className="text-lg font-medium text-black">{siteSettings?.currency_code}</p>
             )}
+          </div>
+        </div>
+
+        {/* Menu Page Header */}
+        <div className="border-t border-gray-100 pt-6">
+          <h3 className="text-lg font-medium text-gray-900 mb-4">Menu Page Header</h3>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Menu Title
+              </label>
+              {isEditing ? (
+                <input
+                  type="text"
+                  name="menu_title"
+                  value={formData.menu_title}
+                  onChange={handleInputChange}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  placeholder="e.g., Our Offer"
+                />
+              ) : (
+                <p className="text-lg font-medium text-black">{siteSettings?.menu_title}</p>
+              )}
+            </div>
+
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-2">
+                Menu Description
+              </label>
+              {isEditing ? (
+                <textarea
+                  name="menu_description"
+                  value={formData.menu_description}
+                  onChange={handleInputChange}
+                  rows={3}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-red-500"
+                  placeholder="Enter menu description"
+                />
+              ) : (
+                <p className="text-gray-600">{siteSettings?.menu_description}</p>
+              )}
+            </div>
           </div>
         </div>
       </div>

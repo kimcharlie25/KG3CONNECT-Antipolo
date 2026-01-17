@@ -21,6 +21,7 @@ export const useLocations = () => {
                 id: loc.id,
                 name: loc.name,
                 address: loc.address || undefined,
+                messengerUrl: loc.messenger_url || undefined,
                 active: loc.active,
                 sortOrder: loc.sort_order
             })) || [];
@@ -42,6 +43,7 @@ export const useLocations = () => {
                 .insert({
                     name: location.name,
                     address: location.address || null,
+                    messenger_url: location.messengerUrl || null,
                     active: location.active ?? true,
                     sort_order: location.sortOrder ?? 0
                 })
@@ -65,6 +67,7 @@ export const useLocations = () => {
                 .update({
                     name: updates.name,
                     address: updates.address || null,
+                    messenger_url: updates.messengerUrl || null,
                     active: updates.active,
                     sort_order: updates.sortOrder
                 })

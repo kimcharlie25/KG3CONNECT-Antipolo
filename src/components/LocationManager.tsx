@@ -10,13 +10,14 @@ const LocationManager: React.FC = () => {
     const [formData, setFormData] = useState<Partial<Location>>({
         name: '',
         address: '',
+        messengerUrl: '',
         active: true,
         sortOrder: 0
     });
     const [isProcessing, setIsProcessing] = useState(false);
 
     const resetForm = () => {
-        setFormData({ name: '', address: '', active: true, sortOrder: 0 });
+        setFormData({ name: '', address: '', messengerUrl: '', active: true, sortOrder: 0 });
         setIsAdding(false);
         setEditingId(null);
     };
@@ -24,7 +25,7 @@ const LocationManager: React.FC = () => {
     const handleAdd = () => {
         setIsAdding(true);
         setEditingId(null);
-        setFormData({ name: '', address: '', active: true, sortOrder: locations.length });
+        setFormData({ name: '', address: '', messengerUrl: '', active: true, sortOrder: locations.length });
     };
 
     const handleEdit = (location: Location) => {
@@ -33,6 +34,7 @@ const LocationManager: React.FC = () => {
         setFormData({
             name: location.name,
             address: location.address || '',
+            messengerUrl: location.messengerUrl || '',
             active: location.active,
             sortOrder: location.sortOrder
         });
@@ -146,6 +148,21 @@ const LocationManager: React.FC = () => {
                                 min="0"
                             />
                         </div>
+                        <div className="md:col-span-2">
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Facebook Messenger Page URL
+                            </label>
+                            <input
+                                type="text"
+                                value={formData.messengerUrl || ''}
+                                onChange={(e) => setFormData({ ...formData, messengerUrl: e.target.value })}
+                                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-green-500 focus:border-transparent"
+                                placeholder="e.g., https://m.me/yourpageid"
+                            />
+                            <p className="text-xs text-gray-500 mt-1">
+                                Customers will be redirected to this Messenger URL when ordering from this location.
+                            </p>
+                        </div>
                         <div className="flex items-center">
                             <label className="flex items-center space-x-2">
                                 <input
@@ -191,6 +208,7 @@ const LocationManager: React.FC = () => {
                             <tr>
                                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Name</th>
                                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Address</th>
+                                <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Messenger URL</th>
                                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Order</th>
                                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Status</th>
                                 <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Actions</th>
@@ -211,14 +229,27 @@ const LocationManager: React.FC = () => {
                                         {location.address || '-'}
                                     </td>
                                     <td className="px-6 py-4 text-sm text-gray-500">
+                                        {location.messengerUrl ? (
+                                            <a
+                                                href={location.messengerUrl}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="text-blue-600 hover:text-blue-800 hover:underline truncate max-w-[200px] block"
+                                                title={location.messengerUrl}
+                                            >
+                                                {location.messengerUrl.replace('https://m.me/', 'm.me/')}
+                                            </a>
+                                        ) : '-'}
+                                    </td>
+                                    <td className="px-6 py-4 text-sm text-gray-500">
                                         {location.sortOrder}
                                     </td>
                                     <td className="px-6 py-4">
                                         <button
                                             onClick={() => handleToggleActive(location)}
                                             className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${location.active
-                                                    ? 'bg-green-100 text-green-800'
-                                                    : 'bg-red-100 text-red-800'
+                                                ? 'bg-green-100 text-green-800'
+                                                : 'bg-red-100 text-red-800'
                                                 }`}
                                         >
                                             {location.active ? 'Active' : 'Inactive'}

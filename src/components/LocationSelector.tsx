@@ -39,7 +39,7 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
             <div className="w-full max-w-md">
                 {/* Header */}
                 <div className="text-center mb-10">
-                    <div className="mx-auto w-20 h-20 bg-green-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
+                    <div className="mx-auto w-20 h-20 bg-orange-600 rounded-full flex items-center justify-center mb-6 shadow-lg">
                         <MapPin className="h-10 w-10 text-white" />
                     </div>
                     <h1 className="text-3xl font-bold text-gray-900 mb-2">
@@ -61,14 +61,14 @@ const LocationSelector: React.FC<LocationSelectorProps> = ({ onSelectLocation })
                             <button
                                 key={location.id}
                                 onClick={() => onSelectLocation(location)}
-                                className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 text-left border border-gray-100 hover:border-green-500 group"
+                                className="w-full bg-white rounded-xl shadow-md hover:shadow-lg transition-all duration-300 p-6 text-left border border-gray-100 hover:border-orange-500 group"
                             >
                                 <div className="flex items-center space-x-4">
-                                    <div className="flex-shrink-0 w-12 h-12 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-600 transition-colors duration-300">
-                                        <MapPin className="h-6 w-6 text-green-600 group-hover:text-white transition-colors duration-300" />
+                                    <div className="flex-shrink-0 w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center group-hover:bg-orange-600 transition-colors duration-300">
+                                        <MapPin className="h-6 w-6 text-orange-600 group-hover:text-white transition-colors duration-300" />
                                     </div>
                                     <div className="flex-1">
-                                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-green-600 transition-colors duration-300">
+                                        <h3 className="text-lg font-semibold text-gray-900 group-hover:text-orange-600 transition-colors duration-300">
                                             {location.name}
                                         </h3>
                                         {location.address && (

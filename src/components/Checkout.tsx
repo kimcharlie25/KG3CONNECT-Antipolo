@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
 import { ArrowLeft } from 'lucide-react';
-import { CartItem, PaymentMethod } from '../types';
+import { CartItem, PaymentMethod, Location } from '../types';
 import { usePaymentMethods } from '../hooks/usePaymentMethods';
 
 interface CheckoutProps {
   cartItems: CartItem[];
   totalPrice: number;
+  selectedLocation?: Location;
   onBack: () => void;
 }
 
-const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, onBack }) => {
+const Checkout: React.FC<CheckoutProps> = ({ cartItems, totalPrice, selectedLocation, onBack }) => {
   const { paymentMethods } = usePaymentMethods();
   const [step, setStep] = useState<'details' | 'payment'>('details');
   const [customerName, setCustomerName] = useState('');
@@ -76,7 +77,10 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
     `.trim();
 
     const encodedMessage = encodeURIComponent(orderDetails);
-    const messengerUrl = `https://m.me/100087943638846?text=${encodedMessage}`;
+    // Use the location's Messenger URL if available, otherwise fall back to default
+    const defaultMessengerUrl = 'https://m.me/100087943638846';
+    const baseMessengerUrl = selectedLocation?.messengerUrl || defaultMessengerUrl;
+    const messengerUrl = `${baseMessengerUrl}?text=${encodedMessage}`;
 
     window.open(messengerUrl, '_blank');
   };
