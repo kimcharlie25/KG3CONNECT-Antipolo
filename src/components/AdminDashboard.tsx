@@ -726,6 +726,7 @@ const AdminDashboard: React.FC = () => {
                     </th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Name</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Category</th>
+                    <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Location</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Price</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Variations</th>
                     <th className="px-6 py-4 text-left text-sm font-medium text-gray-900">Add-ons</th>
@@ -752,6 +753,8 @@ const AdminDashboard: React.FC = () => {
                       </td>
                       <td className="px-6 py-4 text-sm text-gray-500">
                         {categories.find(cat => cat.id === item.category)?.name}
+                      </td><td className="px-6 py-4 text-sm text-gray-500">
+                        {locations.find(cat => cat.id === item.locationId)?.name}
                       </td>
                       <td className="px-6 py-4 text-sm font-medium text-gray-900">
                         <div className="flex flex-col">
