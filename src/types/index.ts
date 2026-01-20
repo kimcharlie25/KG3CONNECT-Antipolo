@@ -82,6 +82,19 @@ export interface SiteSetting {
   updated_at: string;
 }
 
+export interface WifiStep {
+  id: string;
+  image: string;
+  text: string;
+}
+
+export interface Router {
+  id: string;
+  name: string;
+  image: string;
+  steps: WifiStep[];
+}
+
 export interface SiteSettings {
   site_name: string;
   site_logo: string;
@@ -90,4 +103,5 @@ export interface SiteSettings {
   menu_description: string;
   currency: string;
   currency_code: string;
+  wifi_routers?: Router[];
 }

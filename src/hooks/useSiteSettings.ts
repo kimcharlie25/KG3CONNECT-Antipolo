@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../lib/supabase';
-import { SiteSettings, SiteSetting } from '../types';
+import { SiteSettings } from '../types';
 
 export const useSiteSettings = () => {
   const [siteSettings, setSiteSettings] = useState<SiteSettings | null>(null);
@@ -27,7 +27,19 @@ export const useSiteSettings = () => {
         menu_title: data.find(s => s.id === 'menu_title')?.value || 'Our Offer',
         menu_description: data.find(s => s.id === 'menu_description')?.value || 'We offer affordable plans powered by end-to-end fiber connectivity, delivering fast and reliable performance with unlimited data and no capping.',
         currency: data.find(s => s.id === 'currency')?.value || 'PHP',
-        currency_code: data.find(s => s.id === 'currency_code')?.value || 'PHP'
+        currency_code: data.find(s => s.id === 'currency_code')?.value || 'PHP',
+        wifi_routers: (() => {
+          const routersJson = data.find(s => s.id === 'wifi_routers')?.value;
+          if (routersJson) {
+            try {
+              return JSON.parse(routersJson);
+            } catch (e) {
+              console.error('Error parsing wifi_routers:', e);
+              return [];
+            }
+          }
+          return [];
+        })()
       };
 
       setSiteSettings(settings);
@@ -68,8 +80,8 @@ export const useSiteSettings = () => {
           .from('site_settings')
           .upsert({
             id: key,
-            value: value,
-            type: key === 'site_logo' ? 'image' : 'text'
+            value: typeof value === 'object' ? JSON.stringify(value) : String(value),
+            type: (key === 'site_logo') ? 'image' : 'text'
           })
       );
 
