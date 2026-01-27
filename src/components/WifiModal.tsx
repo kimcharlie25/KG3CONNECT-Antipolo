@@ -85,7 +85,7 @@ const WifiModal: React.FC<WifiModalProps> = ({ isOpen, onClose, routers = [] }) 
                                 </div>
 
                                 {activeRouter.image ? (
-                                    <div className="w-32 h-32 flex-shrink-0 bg-white rounded-2xl p-2 shadow-md border border-gray-100 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
+                                    <div className="w-80 h-80 flex-shrink-0 bg-white rounded-2xl p-2 shadow-md border border-gray-100 flex items-center justify-center transform group-hover:scale-105 transition-transform duration-300">
                                         <img
                                             src={activeRouter.image}
                                             alt={activeRouter.name}
@@ -93,7 +93,7 @@ const WifiModal: React.FC<WifiModalProps> = ({ isOpen, onClose, routers = [] }) 
                                         />
                                     </div>
                                 ) : (
-                                    <div className="w-32 h-32 flex-shrink-0 bg-white rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-200 text-gray-300">
+                                    <div className="w-80 h-80 flex-shrink-0 bg-white rounded-2xl flex items-center justify-center border-2 border-dashed border-gray-200 text-gray-300">
                                         <Wifi className="w-12 h-12" />
                                     </div>
                                 )}

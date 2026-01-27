@@ -183,8 +183,12 @@ Please confirm this order to proceed. Thank you for choosing KG3CONNECT!
                     value={wifiPassword}
                     onChange={(e) => setWifiPassword(e.target.value)}
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-kg3-orange focus:border-transparent transition-all duration-200"
-                    placeholder="Enter Wifi Password"
+                    placeholder="at least 8 characters"
+                    minLength={8}
                   />
+                  {wifiPassword && wifiPassword.length > 0 && wifiPassword.length < 8 && (
+                    <p className="text-sm text-red-600 mt-1">Password must be at least 8 characters</p>
+                  )}
                 </div>
               </div>
 
